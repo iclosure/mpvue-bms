@@ -1,4 +1,4 @@
-# BMS mini-program
+# mini-program (BMS)
 
 > a mpvue demo
 
