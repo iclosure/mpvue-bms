@@ -1,4 +1,4 @@
-# hello
+# BMS mini-program
 
 > a mpvue demo
 
