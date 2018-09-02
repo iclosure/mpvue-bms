@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="topBar">
-
+      <i-cell i-class="cellTopBar" title="均衡开关">
+        <i-switch :value="switch1" size="small" @change="onSwEquChange" slot="footer">
+            <view slot="open">开</view>
+            <view slot="close">关</view>
+        </i-switch>
+    </i-cell>
     </div>
     <div class="globalStatus">
 
@@ -29,7 +34,8 @@ export default {
   data () {
     return {
       cellVolts: [],
-      timerId: 0
+      timerId: 0,
+      switch1: true
     }
   },
   created () {
@@ -47,15 +53,24 @@ export default {
   methods: {
     fixNumeric (numeric, length) {
       return fixNumeric(numeric, length)
+    },
+    onSwEquChange (event) {
+      this.switch1 = event.target.value
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+.topBar {
+  width: 100%;
+  height: 60rpx;
+  background: #484848;
+}
 
-.rate1 i-badge {
-  width: 189rpx;
+.cellTopBar {
+  background-color: #222;
+  color: black;
 }
 
 </style>

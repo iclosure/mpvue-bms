@@ -1,7 +1,7 @@
 <script>
 
 export default {
-  data: function () {
+  data () {
     return {
       sysinfo: wx.getSystemInfoSync(),
       userInfo: {},
@@ -9,12 +9,17 @@ export default {
       canIUse: wx.canIUse('button.open-type.getUserInfo')
     }
   },
-  created: function () {
+  globalData () {
+    return {
+      message: 'helloworld'
+    }
+  },
+  created () {
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
   },
-  onLaunch: function () {
+  onLaunch () {
     var platform = this.getPlatform()
     var version = this.getVersion()
     var showNotice = function (version) {
@@ -34,27 +39,27 @@ export default {
     console.log('app hidden')
   },
   methods: {
-    getModel: function () {
+    getModel () {
       // 获取手机型号
       return this.sysinfo['model']
     },
-    getVersion: function () {
+    getVersion () {
       // 获取微信版本号
       return this.sysinfo['version']
     },
-    getSystem: function () {
+    getSystem () {
       // 获取操作系统版本
       return this.sysinfo['system']
     },
-    getPlatform: function () {
+    getPlatform () {
       // 获取客户端平台
       return this.sysinfo['platform']
     },
-    getSDKVersion: function () {
+    getSDKVersion () {
       // 获取客户端基础库版本
       return this.sysinfo['SDKVersion']
     },
-    versionCompare: function (ver1, ver2) {
+    versionCompare (ver1, ver2) {
       // 版本比较
       var version1pre = parseFloat(ver1)
       var version2pre = parseFloat(ver2)

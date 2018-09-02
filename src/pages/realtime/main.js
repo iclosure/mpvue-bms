@@ -9,7 +9,8 @@ export default {
     navigationBarTitleText: '实时状态',
     usingComponents: {
       'i-button': '/static/iview/button/index',
-      'i-rate': '/static/iview/rate/index'
+      'i-switch': '/static/iview/switch/index',
+      'i-cell': '/static/iview/cell/index'
     }
   }
 }
