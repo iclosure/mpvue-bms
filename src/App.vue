@@ -30,6 +30,9 @@ export default {
       showNotice('6.5.6')
     }
   },
+  onHide () {
+    console.log('app hidden')
+  },
   methods: {
     getModel: function () {
       // 获取手机型号
@@ -93,7 +96,7 @@ export default {
 }
 
 page {
-    background: #445;
+    background: #323232;
 }
 
 </style>

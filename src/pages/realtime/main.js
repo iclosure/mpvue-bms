@@ -6,6 +6,10 @@ app.$mount()
 
 export default {
   config: {
-    navigationBarTitleText: '实时状态'
+    navigationBarTitleText: '实时状态',
+    usingComponents: {
+      'i-button': '/static/iview/button/index',
+      'i-rate': '/static/iview/rate/index'
+    }
   }
 }

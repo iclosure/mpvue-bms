@@ -1,6 +1,5 @@
 <template>
   <div>
-    <button>test</button>
   </div>
 </template>
 

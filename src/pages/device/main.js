@@ -9,7 +9,6 @@ export default {
     return {
     }
   },
-
   config: {
     navigationBarTitleText: '设备管理',
     enablePullDownRefresh: true,

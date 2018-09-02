@@ -3,7 +3,7 @@
     <i-panel v-if="devices.length > 0" class="cell-panel-device">
       <i-cell-group v-for="(device, index) in devices" :key="index">
         <i-cell :title="device.name" :label="device.deviceId" :value="device.RSSI" @click="connectDevice(`${index}`)" class='cell-device'>
-          <i-icon custom="/static/image/bluetooth.png" size="30" slot="icon"/>
+          <i-icon custom="static/image/bluetooth.png" size="30" slot="icon"/>
         </i-cell>
       </i-cell-group>
     </i-panel>
@@ -24,7 +24,11 @@ export default {
       devices: [],
       services: [],
       currentIndex: -1,
-      serviceId: ''
+      serviceId: '',
+      //
+      ch_uuid_tx: '0000FFE1-0000-1000-8000-00805F9B34FB',
+      ch_uuid_func: '0000FFE2-0000-1000-8000-00805F9B34FB',
+      ch_uuid_XX: '0000FFE3-0000-1000-8000-00805F9B34FB'
     }
   },
 
@@ -44,8 +48,14 @@ export default {
   },
   watch: {
   },
+  clickMe () {
+    console.log('click me! [0]')
+  },
 
   methods: {
+    clickMe () {
+      console.log('click me! [1]')
+    },
     openAdapter () {
       var that = this
       wx.openBluetoothAdapter({
@@ -99,7 +109,7 @@ export default {
         })
       }, 5000)
       wx.startBluetoothDevicesDiscovery({
-        // services: ['FFE0'],  // 只搜索透传蓝牙
+        // services: ['FFE0'],
         success: function (res) {
           that.registryFound()
         },
@@ -173,7 +183,7 @@ export default {
       }
       wx.onBLEConnectionStateChange(function (res) {
         // 该方法回调中可以用于处理连接意外断开等异常情况
-        console.log(`device ${res.deviceId} state has changed, connected: ${res.connected}`)
+        console.log(`state of device ${res.deviceId} has changed, connected: ${res.connected}`)
       })
       wx.onBLECharacteristicValueChange(function (characteristic) {
         console.log('characteristic value comed:', characteristic)
@@ -184,9 +194,7 @@ export default {
         success: function (res) {
           that.stopScan(false)
           console.log('connect success')
-          /**
-           * 连接成功，后开始获取设备的服务列表
-           */
+          // 连接成功后开始获取设备的服务列表
           wx.getBLEDeviceServices({
             // 这里的 deviceId 需要在上面的 getBluetoothDevices中获取
             deviceId: device.deviceId,
@@ -205,87 +213,37 @@ export default {
                   deviceId: device.deviceId,
                   // 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取
                   serviceId: that.serviceId,
-                  success: function (res) {
+                  success (res) {
                     console.log('getBLEDeviceCharacteristics:', res.characteristics)
-                    for (var i = 0; i < res.characteristics.length; i++) {
-                      var characteristic = res.characteristics[i]
-                      console.log('characteristic.uuid:', characteristic.uuid)
-                      if (characteristic.uuid.indexOf('FFE1') !== -1) {
-                        console.log('----------FFE1')
-                      } else if (characteristic.uuid.indexOf('FFE2') !== -1) {
-                        console.log('----------FFE2')
-                      } else if (characteristic.uuid.indexOf('FFE3') !== -1) {
-                        console.log('----------FFE3')
-                      }
-                    }
                     // 回调获取设备发过来的数据
                     wx.onBLECharacteristicValueChange(function (characteristic) {
-                      console.log('characteristic value comed:', characteristic.value, characteristic.characteristicId)
-                      // {value: ArrayBuffer, deviceId: "D8:00:D2:4F:24:17",
-                      // serviceId: "ba11f08c-5f14-0b0d-1080-007cbe238851-0x600000460240",
-                      // characteristicId: "0000cd04-0000-1000-8000-00805f9b34fb-0x60800069fb80"}
-                      // 监听cd04中的结果
-                      if (characteristic.characteristicId.indexOf('FFE1') !== -1) {
+                      console.log('characteristic value comed:', characteristic.characteristicId, '>>', characteristic.value)
+                      if (characteristic.characteristicId === that.ch_uuid_tx) {
                         const result = characteristic.value
                         const hex = that.buf2hex(result)
                         console.log(hex)
-                      } else if (characteristic.characteristicId.indexOf('FFE2') !== -1) {
-                        const result = characteristic.value
-                        const hex = that.buf2hex(result)
-                        console.log(hex)
-                      } else if (characteristic.characteristicId.indexOf('FFE3') !== -1) {
+                      } else if (characteristic.characteristicId === that.ch_uuid_func) {
                         const result = characteristic.value
                         const hex = that.buf2hex(result)
                         console.log(hex)
                       }
                     })
-                    // 顺序开发设备特征notifiy
                     wx.notifyBLECharacteristicValueChanged({
                       deviceId: device.deviceId,
                       serviceId: that.serviceId,
-                      characteristicId: '0000FFE1-0000-1000-8000-00805F9B34FB',
+                      characteristicId: that.ch_uuid_tx,
                       state: true,
-                      success: function (res) {
-                        // success
-                        console.log('notifyBLECharacteristicValueChanged success', res)
-                      },
-                      fail: function (res) {
-                        // fail
-                      },
-                      complete: function (res) {
-                        // complete
+                      fail (res) {
+                        console.log('notify FFE1 fail', res)
                       }
                     })
                     wx.notifyBLECharacteristicValueChanged({
                       deviceId: device.deviceId,
                       serviceId: that.serviceId,
-                      characteristicId: '0000FFE2-0000-1000-8000-00805F9B34FB',
+                      characteristicId: that.ch_uuid_func,
                       state: true,
-                      success: function (res) {
-                        // success
-                        console.log('notifyBLECharacteristicValueChanged success', res)
-                      },
-                      fail: function (res) {
-                        // fail
-                      },
-                      complete: function (res) {
-                        // complete
-                      }
-                    })
-                    wx.notifyBLECharacteristicValueChanged({
-                      deviceId: device.deviceId,
-                      serviceId: that.serviceId,
-                      characteristicId: '0000FFE3-0000-1000-8000-00805F9B34FB',
-                      state: true,
-                      success: function (res) {
-                        // success
-                        console.log('notifyBLECharacteristicValueChanged success', res)
-                      },
-                      fail: function (res) {
-                        // fail
-                      },
-                      complete: function (res) {
-                        // complete
+                      fail (res) {
+                        console.log('notify FFE2 fail', res)
                       }
                     })
                   },
@@ -327,10 +285,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss' scoped>
 .cell-panel-device {
-    display: block;
-    margin-top: 5px;
+  display: block;
+  margin-top: 5px;
 }
 
 </style>

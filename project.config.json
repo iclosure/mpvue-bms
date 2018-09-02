@@ -2,15 +2,15 @@
 	"description": "项目配置文件。",
 	"setting": {
 		"urlCheck": true,
-		"es6": false,
+		"es6": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
 	"miniprogramRoot": "./dist/",
 	"compileType": "miniprogram",
-	"appid": "iclosure-hello",
-	"projectname": "hello",
+	"appid": "wxccd860b71c698034",
+	"projectname": "mpvue-bms",
 	"condition": {
 		"search": {
 			"current": -1,

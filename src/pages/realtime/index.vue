@@ -1,38 +1,61 @@
 <template>
   <div>
-    <button @click="flush('test')">test</button>
-    <div v-if="show">次数</div>
+    <div class="topBar">
+
+    </div>
+    <div class="globalStatus">
+
+    </div>
+    <ul class="cellVolts" :key="index" v-for="(item, index) in cellVolts">
+      <li class="celVolt">
+        <span class="label">fixNumeric({{ index }} + 1, 2)</span>
+        <span class="field">{{ item.value }}</span>
+      </li>
+    </ul>
+    <ul class="cellReses" :key="index" v-for="(item, index) in cellReses">
+      <li class="cellRes">
+        <span class="label">fixNumeric({{ index }} + 1, 2)</span>
+        <span class="field">{{ item.value }}</span>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+import { formatSeconds, fixNumeric } from '@/utils/index'
 
 export default {
-  components: {
-  },
-
+  components: {},
   data () {
     return {
-      show: true,
-      flags: {
-        visible: true,
-        test: false
-      }
+      cellVolts: [],
+      timerId: 0
     }
   },
-
   created () {
   },
-
+  onShow () {
+    this.timerId = setInterval(() => {
+      wx.setNavigationBarTitle({
+        title: formatSeconds(new Date().getSeconds())
+      })
+    }, 1000)
+  },
+  onHide () {
+    clearInterval(this.timerId)
+  },
   methods: {
-    flush: function (msg) {
-      console.log('hello, world', msg)
-      this.show = !this.show
+    fixNumeric (numeric, length) {
+      return fixNumeric(numeric, length)
     }
   }
 }
 </script>
 
 <style>
+
+.rate1 i-badge {
+  width: 189rpx;
+}
 
 </style>
