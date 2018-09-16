@@ -5,18 +5,18 @@
     </div>
     <div class="content">
       <div class="cells" v-for="(value, i) in values" :key="i">
-          <CellVoltCard :index="i" :value="value"></CellVoltCard>
+          <CellValueCard :index="i" :value="value" unit="V"></CellValueCard>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CellVoltCard from './CellVoltCard'
+import CellValueCard from './CellValueCard'
 
 export default {
   components: {
-    CellVoltCard
+    CellValueCard
   },
   props: ['values']
 }
@@ -27,10 +27,9 @@ export default {
 .cellsVolt {
   background-color: #3a3a3a;
   color: #fff;
-  margin: 2px auto;
   .caption {
     background-color: #38383e;
-    color: #a2cefa;
+    color: #93bbe4;
     width: 100%;
     height: 1.5em;
     display: flex;
@@ -39,10 +38,10 @@ export default {
     }
   }
   .content {
-    display: grid;
-    grid-template-rows: repeat(8, 1fr);
-    grid-auto-flow: column;
-    justify-items: stretch;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+    height: 384rpx;
   }
 }
 

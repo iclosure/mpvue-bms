@@ -1,8 +1,12 @@
 <template>
-  <div class='cellVolt'>
-    <span class="index">{{ number }}</span>
-    <span class="value">{{ numeric }}</span>
-    <span class="unit" v-if="value">Ω</span>
+  <div class='cellValue'>
+    <div class="divIndex">
+      <div class="index">{{ number }}</div>
+    </div>
+    <div class="divValue">
+      <div class="value">{{ numeric }}</div>
+    </div>
+    <div class="unit" v-if="value">{{ unit }}</div>
   </div>
 </template>
 
@@ -12,7 +16,7 @@ import { fixNumeric } from '@/utils/index'
 export default {
   components: {
   },
-  props: ['index', 'value'],
+  props: ['index', 'value', 'unit'],
   methods: {
   },
   computed: {
@@ -29,32 +33,41 @@ export default {
 <style lang="scss" scoped>
 @import url('../../style/font/consolas.css');
 
-.cellVolt {
+.cellValue {
   background-color: #3e3e42;
-  border-radius: 3px;
-  margin: 1px;
+  border-radius: 6rpx;
+  margin: 1rpx;
+  width: 251rpx;
+  height: 44rpx;
   display: flex;
-  .index {
+  .divIndex {
+    height: 80%;
     background-color: #355b73;
     color: #eee;
     width: 1.7em;
-    height: 100%;
-    margin: auto 2px auto 2px;
-    border-radius: 0.7em;
-    text-align: center;
+    margin: auto 2rpx auto 2rpx;
+    border-radius: 10px;
     font-family: Consolas;
     font-size: 0.9em;
+    display: flex;
+    .index {
+      margin: auto;
+    }
   }
-  .value {
+  .divValue {
     font-family: "Consolas";
     margin-left: 6rpx;
     color: #6cca62;
+    display: flex;
+    .value {
+      margin: auto;
+    }
   }
   .unit {
     color: lightgreen;
     font-size: 0.5em;
-    margin-left: 1px;
-    margin-top: 0;
+    margin-left: 1rpx;
+    margin-top: 1rpx;
   }
 }
 

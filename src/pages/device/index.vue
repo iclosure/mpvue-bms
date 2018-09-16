@@ -1,21 +1,23 @@
 <template>
   <div>
-    <i-panel v-if="devices.length > 0" class="cell-panel-device">
+    <!-- <i-panel v-if="devices.length > 0" class="cell-panel-device">
       <i-cell-group v-for="(device, index) in devices" :key="index">
         <i-cell :title="device.name" :label="device.deviceId" :value="device.RSSI" @click="connectDevice(`${index}`)" class='cell-device'>
           <i-icon custom="static/image/bluetooth.png" size="30" slot="icon"/>
         </i-cell>
       </i-cell-group>
-    </i-panel>
+    </i-panel> -->
+    <DevicesPane i-class="devicesPane" :devices="devices"></DevicesPane>
   </div>
 </template>
 
 <script>
+import DevicesPane from '@/components/device/DevicesPane'
 
 export default {
   components: {
+    DevicesPane
   },
-
   data () {
     return {
       sysinfo: wx.getStorageInfoSync(),
@@ -34,6 +36,14 @@ export default {
 
   created () {
     this.openAdapter()
+    // TEST
+    for (var i = 0; i < 20; ++i) {
+      this.devices.push({
+        name: 'item ' + i,
+        deviceId: i + ' ' + (Math.random() * 10).toFixed(3),
+        RSSI: (Math.random() * 10).toFixed(3)
+      })
+    }
   },
   destroyed () {
     this.stopScan()

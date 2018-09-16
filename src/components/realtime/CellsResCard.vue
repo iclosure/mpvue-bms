@@ -5,18 +5,18 @@
     </div>
     <div class="content">
       <div class="cells" v-for="(value, i) in values" :key="i">
-          <CellResCard :index="i" :value="value"></CellResCard>
+          <CellValueCard :index="i" :value="value" unit="Ω"></CellValueCard>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CellResCard from './CellResCard'
+import CellValueCard from './CellValueCard'
 
 export default {
   components: {
-    CellResCard
+    CellValueCard
   },
   props: ['values']
 }
@@ -27,7 +27,6 @@ export default {
 .cellsRes {
   background-color: #3a3a3a;
   color: #fff;
-  margin: 2px auto;
   .caption {
     background-color: #38383e;
     color: #a2cefa;
@@ -39,10 +38,10 @@ export default {
     }
   }
   .content {
-    display: grid;
-    grid-template-rows: repeat(9, 1fr);
-    grid-auto-flow: column;
-    justify-items: stretch;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-round;
+    height: 432rpx;
   }
 }
 

@@ -39,7 +39,7 @@ export default {
       this.cellReses.push(Math.random() * 10)
     }
     // TEST
-    setInterval(() => {
+    setTimeout(() => {
       var i
       var array = []
       for (i = 0; i < this.cellVolts.length; ++i) {

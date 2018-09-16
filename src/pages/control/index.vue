@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="message">
+      当前均衡板不支持该功能
+    </div>
   </div>
 </template>
 
@@ -19,6 +22,19 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  .message {
+    margin: auto;
+    color: #666;
+    font-size: 1.5em;
+  }
+}
 
 </style>
+

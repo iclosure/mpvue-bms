@@ -25,6 +25,7 @@ export default {
 <style lang="scss" scoped>
 
 .valueField {
+  width: 50%;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -38,7 +39,7 @@ export default {
   .unit {
     color: lightgreen;
     font-size: 0.5em;
-    margin-left: 1px;
+    margin-left: 1rpx;
     margin-top: 0;
   }
 }

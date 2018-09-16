@@ -21,10 +21,11 @@ export default {
 <style lang="scss" scoped>
 
 .majorStatus {
-  margin: 1px auto;
+  margin: 1rpx auto;
   background-color: #3a3a3a;
-  display: grid;
-  grid-template-columns: 50% 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: stretch;
 }
 
 </style>

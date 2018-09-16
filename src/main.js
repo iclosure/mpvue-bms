@@ -11,10 +11,10 @@ export default {
   config: {
     pages: [
       'pages/logs/main',
-      '^pages/realtime/main',
+      'pages/realtime/main',
       'pages/settings/main',
       'pages/control/main',
-      'pages/device/main'
+      '^pages/device/main'
     ],
     window: {
       backgroundTextStyle: 'dark',
