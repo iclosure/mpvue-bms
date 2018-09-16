@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <div class="cells" v-for="(value, i) in values" :key="i">
-          <CellValueCard :index="i" :value="value" unit="V"></CellValueCard>
+          <CellValueCard :index="i + 1" :value="value" unit="V"></CellValueCard>
       </div>
     </div>
   </div>

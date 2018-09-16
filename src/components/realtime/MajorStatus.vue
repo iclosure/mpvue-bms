@@ -25,7 +25,6 @@ export default {
   background-color: #3a3a3a;
   display: flex;
   flex-wrap: wrap;
-  justify-items: stretch;
 }
 
 </style>

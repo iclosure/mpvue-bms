@@ -32,8 +32,6 @@ export default {
   .value {
     font-family: Consolas;
     color: #6cca62;
-    vertical-align: center;
-    text-align: center;
     margin: auto 0;
   }
   .unit {

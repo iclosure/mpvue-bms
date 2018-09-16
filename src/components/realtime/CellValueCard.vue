@@ -37,7 +37,7 @@ export default {
   background-color: #3e3e42;
   border-radius: 6rpx;
   margin: 1rpx;
-  width: 251rpx;
+  width: 249rpx;
   height: 44rpx;
   display: flex;
   .divIndex {
