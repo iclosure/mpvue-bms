@@ -18,7 +18,7 @@
 		"vuex": "^3.0.1"
 	},
 	"devDependencies": {
-		"@vue/cli": "^3.0.1",
+		"@vue/cli": "^3.0.3",
 		"babel-core": "^6.22.1",
 		"babel-eslint": "^8.2.3",
 		"babel-loader": "^7.1.1",
@@ -58,7 +58,7 @@
 		"portfinder": "^1.0.17",
 		"postcss-loader": "^2.1.4",
 		"postcss-mpvue-wxss": "^1.0.0",
-		"prettier": "^1.12.1",
+		"prettier": "^1.14.2",
 		"px2rpx-loader": "^0.1.10",
 		"rimraf": "^2.6.0",
 		"sass-loader": "^7.1.0",

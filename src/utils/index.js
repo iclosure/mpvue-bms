@@ -58,7 +58,7 @@ export function formatSeconds (value) {
 }
 
 export function fixNumeric (numeric, length) {
-  return ('' + numeric).length < length ? ((new Array(length + 1)).join('0') + numeric).slice(-length) : '' + numeric
+  return (Array(length).join('0') + numeric).slice(-length)
 }
 
 export default {

@@ -101,7 +101,8 @@ export default {
 }
 
 page {
-    background: #323232;
+  background: #323232;
+  font-size: 15px;
 }
 
 </style>

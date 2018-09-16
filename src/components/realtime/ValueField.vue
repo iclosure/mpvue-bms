@@ -1,0 +1,46 @@
+<template>
+  <div class="valueField">
+    <div class="name">{{ name }}：</div>
+    <div class="value">{{ numeric }}</div>
+    <div class="unit" v-if="unitValid" >{{ unit }}</div>
+  </div>
+</template>
+
+<script>
+
+export default {
+  props: ['name', 'value', 'unit'],
+  computed: {
+    numeric () {
+      return this.value.toFixed(3)
+    },
+    unitValid () {
+      var unit = this.unit
+      return unit && unit.length > 0
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+
+.valueField {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  .value {
+    font-family: Consolas;
+    color: #6cca62;
+    vertical-align: center;
+    text-align: center;
+    margin: auto 0;
+  }
+  .unit {
+    color: lightgreen;
+    font-size: 0.5em;
+    margin-left: 1px;
+    margin-top: 0;
+  }
+}
+
+</style>

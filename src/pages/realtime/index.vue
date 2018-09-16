@@ -1,44 +1,57 @@
 <template>
-  <div>
-    <div class="topBar">
-      <i-cell i-class="cellTopBar" title="均衡开关">
-        <i-switch :value="switch1" size="small" @change="onSwEquChange" slot="footer">
-            <view slot="open">开</view>
-            <view slot="close">关</view>
-        </i-switch>
-    </i-cell>
-    </div>
-    <div class="globalStatus">
-
-    </div>
-    <ul class="cellVolts" :key="index" v-for="(item, index) in cellVolts">
-      <li class="celVolt">
-        <span class="label">fixNumeric({{ index }} + 1, 2)</span>
-        <span class="field">{{ item.value }}</span>
-      </li>
-    </ul>
-    <ul class="cellReses" :key="index" v-for="(item, index) in cellReses">
-      <li class="cellRes">
-        <span class="label">fixNumeric({{ index }} + 1, 2)</span>
-        <span class="field">{{ item.value }}</span>
-      </li>
-    </ul>
-  </div>
+<div>
+  <HeaderCard i-class="header" :switchEqu="switchEqu"></HeaderCard>
+  <MajorStatus i-class="majorStatus"></MajorStatus>
+  <CellsVoltCard i-class="cellsVolt" :values="cellVolts"></CellsVoltCard>
+  <CellsResCard i-class="cellsRes" :values="cellReses"></CellsResCard>
+</div>
 </template>
 
 <script>
-import { formatSeconds, fixNumeric } from '@/utils/index'
+import { formatSeconds } from '@/utils/index'
+import HeaderCard from '@/components/realtime/HeaderCard'
+import MajorStatus from '@/components/realtime/MajorStatus'
+import CellsVoltCard from '@/components/realtime/CellsVoltCard'
+import CellsResCard from '@/components/realtime/CellsResCard'
 
 export default {
-  components: {},
+  components: {
+    HeaderCard,
+    MajorStatus,
+    CellsVoltCard,
+    CellsResCard
+  },
   data () {
     return {
-      cellVolts: [],
       timerId: 0,
-      switch1: true
+      switchEqu: true,
+      cellVolts: [],
+      cellReses: []
     }
   },
   created () {
+    // TEST
+    var i
+    for (i = 0; i < 24; ++i) {
+      this.cellVolts.push(Math.random() * 10)
+    }
+    for (i = 0; i < 25; ++i) {
+      this.cellReses.push(Math.random() * 10)
+    }
+    // TEST
+    setInterval(() => {
+      var i
+      var array = []
+      for (i = 0; i < this.cellVolts.length; ++i) {
+        array.push(Math.random() * 10)
+      }
+      this.cellVolts = array
+      array = []
+      for (i = 0; i < this.cellReses.length; ++i) {
+        array.push(Math.random() * 10)
+      }
+      this.cellReses = array
+    }, 500)
   },
   onShow () {
     this.timerId = setInterval(() => {
@@ -51,26 +64,13 @@ export default {
     clearInterval(this.timerId)
   },
   methods: {
-    fixNumeric (numeric, length) {
-      return fixNumeric(numeric, length)
-    },
     onSwEquChange (event) {
-      this.switch1 = event.target.value
+      this.swEqu = event.target.value
     }
   }
 }
 </script>
 
-<style lang="scss">
-.topBar {
-  width: 100%;
-  height: 60rpx;
-  background: #484848;
-}
-
-.cellTopBar {
-  background-color: #222;
-  color: black;
-}
+<style lang="scss" scoped>
 
 </style>

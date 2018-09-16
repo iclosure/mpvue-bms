@@ -19,7 +19,7 @@ export default {
     window: {
       backgroundTextStyle: 'dark',
       navigationBarBackgroundColor: '#652725',
-      navigationBarTitleText: '极空BMS',
+      navigationBarTitleText: 'BMS',
       navigationBarTextStyle: 'white',
       backgroundColor: '#303030'
     },

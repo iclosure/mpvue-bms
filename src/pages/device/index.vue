@@ -58,30 +58,38 @@ export default {
     },
     openAdapter () {
       var that = this
-      wx.openBluetoothAdapter({
-        success: function () {},
-        fail: function () {
-          wx.showLoading({
-            title: '请开蓝牙',
-            icon: 'loading',
-            duration: 2000
-          })
-        },
-        complete: function () {
-          console.log('complete opening adapter')
-          wx.onBluetoothAdapterStateChange(function (res) {
-            if (res.available) {
-              if (that.sysinfo['platform'] === 'ios') {
-                setTimeout(function () {
+      if (wx.openBluetoothAdapter) {
+        wx.openBluetoothAdapter({
+          success: function () {},
+          fail: function () {
+            wx.showLoading({
+              title: '请开蓝牙',
+              icon: 'loading',
+              duration: 2000
+            })
+          },
+          complete: function () {
+            console.log('complete opening adapter')
+            wx.onBluetoothAdapterStateChange(function (res) {
+              if (res.available) {
+                if (that.sysinfo['platform'] === 'ios') {
+                  setTimeout(function () {
+                    that.openAdapter()
+                  }, 2000)
+                } else {
                   that.openAdapter()
-                }, 2000)
-              } else {
-                that.openAdapter()
+                }
               }
-            }
-          })
-        }
-      })
+            })
+          }
+        })
+      } else {
+        // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
+        wx.showModal({
+          title: '提示',
+          content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+        })
+      }
     },
     closeAdapter () {
       this.devices = []
