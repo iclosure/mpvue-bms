@@ -36,8 +36,8 @@ export default {
 .cellValue {
   background-color: #3e3e42;
   border-radius: 6rpx;
-  margin: 1rpx;
-  width: 249rpx;
+  margin: auto;
+  width: 247rpx;
   height: 44rpx;
   display: flex;
   .divIndex {

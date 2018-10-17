@@ -1,5 +1,8 @@
 <template>
 <div>
+  <div class="title">
+    --{{ what }}
+  </div>
   <HeaderCard i-class="header" :switchEqu="switchEqu"></HeaderCard>
   <MajorStatus i-class="majorStatus"></MajorStatus>
   <CellsVoltCard i-class="cellsVolt" :values="cellVolts"></CellsVoltCard>
@@ -13,6 +16,8 @@ import HeaderCard from '@/components/realtime/HeaderCard'
 import MajorStatus from '@/components/realtime/MajorStatus'
 import CellsVoltCard from '@/components/realtime/CellsVoltCard'
 import CellsResCard from '@/components/realtime/CellsResCard'
+
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -28,6 +33,11 @@ export default {
       cellVolts: [],
       cellReses: []
     }
+  },
+  computed: {
+    ...mapState({
+      what: state => state.what
+    })
   },
   created () {
     // TEST

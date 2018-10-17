@@ -4,9 +4,7 @@
       <div class="title">单体电压</div>
     </div>
     <div class="content">
-      <div class="cells" v-for="(value, i) in values" :key="i">
-          <CellValueCard :index="i + 1" :value="value" unit="V"></CellValueCard>
-      </div>
+      <CellValueCard v-for="(value, i) in values" :key="i" :index="i + 1" :value="value" unit="V"></CellValueCard>
     </div>
   </div>
 </template>

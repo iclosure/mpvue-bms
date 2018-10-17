@@ -15,9 +15,9 @@ export default {
     }
   },
   created () {
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    // const logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.clearStorageSync()
   },
   onLaunch () {
     var platform = this.getPlatform()

@@ -4,9 +4,7 @@
       <div class="title">均衡线电阻</div>
     </div>
     <div class="content">
-      <div class="cells" v-for="(value, i) in values" :key="i">
-          <CellValueCard :index="i" :value="value" unit="Ω"></CellValueCard>
-      </div>
+      <CellValueCard v-for="(value, i) in values" :key="i" :index="i" :value="value" unit="Ω"></CellValueCard>
     </div>
   </div>
 </template>
@@ -40,7 +38,7 @@ export default {
   .content {
     display: flex;
     flex-flow: column wrap;
-    justify-content: space-round;
+    justify-content: space-between;
     height: 432rpx;
   }
 }
