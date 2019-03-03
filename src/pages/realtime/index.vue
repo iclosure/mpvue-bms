@@ -1,8 +1,8 @@
 <template>
 <div>
-  <div class="title">
-    --{{ what }}
-  </div>
+  <!-- <div class="title">
+    --{{ what }} 
+  </div> -->
   <HeaderCard i-class="header" :switchEqu="switchEqu"></HeaderCard>
   <MajorStatus i-class="majorStatus"></MajorStatus>
   <CellsVoltCard i-class="cellsVolt" :values="cellVolts"></CellsVoltCard>
